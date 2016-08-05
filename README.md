@@ -39,3 +39,31 @@ $ bundle install
 ```
 
 Then run the `rails server` and go to `http://localhost:3000` to make sure everything is correct.
+
+# Create The Ability To Add Todo-List
+To start, we're going to quickly create the ability to add todo list by generating a todo-list scaffold.
+```console
+$ rails g scaffold todo_list title:string description:text
+$ rake db:migrate
+```
+
+Let's confirm that is worked.          
+We'll go to `http://localhost:3000/todo_lists`. And now, we have the ability to create todo-lists.        
+
+
+Then we set the root of the application.       
+Let's open up `config/routes.rb`
+```ruby
+Rails.application.routes.draw do
+  resources :todo_lists
+  root "todo_lists#index"
+end
+```
+
+Now, if we just go to `http://localhost:3000/`, it'll list out all our todos. 
+
+
+Next things we want to do is generate a model for our todo items.
+
+
+To be continued...
