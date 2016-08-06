@@ -239,16 +239,115 @@ end
 ```
 
 # Mark A Item As Complete
-Next, we want the ability to mark a item as complete.
+Next, we want the ability to mark a item as complete.         
+So, what we gonna do next is we want to add a migration. To add a completed date time to our todo-item's table.         
+```console
+$ rails g migration add_completed_at_to_todo_items completed_at:datetime
+$ rake db:migrate
+```
+
+Next, we need to add some routes for the ability to mark as complete.        
+In `config/routes.rb`
+```ruby
+Rails.application.routes.draw do
+  resources :todo_lists do
+  	resources :todo_items do
+  		member do
+  			patch :complete
+  		end
+  	end
+  end
+
+  root "todo_lists#index"
+end
+```
+
+
+In `app/views/todo_items/_todo_item.html.erb`
+```html
+
+	<div class="row clearfix">
+		<% if todo_item.completed? %>
+			<div class="complete">
+				<%= link_to "Mark as Complete", complete_todo_list_todo_item_path(@todo_list, todo_item.id), method: :patch %>
+			</div>
+			<div class="todo_item">
+				<p style="opacity: 0.4;"><strike><%= todo_item.content %></strike></p>
+			</div>
+			<div class="trash">
+				<%= link_to "Delete", todo_list_todo_item_path(@todo_list, todo_item.id), method: :delete, data: { confirm: "Are you sure?" } %>
+			</div>
+		<% else %>
+			<div class="complete">
+				<%= link_to "Mark as Complete", complete_todo_list_todo_item_path(@todo_list, todo_item.id), method: :patch %>
+			</div>
+			<div class="todo_item">
+				<p><%= todo_item.content %></p>
+			</div>
+			<div class="trash">
+				<%= link_to "Delete", todo_list_todo_item_path(@todo_list, todo_item.id), method: :delete, data: { confirm: "Are you sure?" } %>
+			</div>
+		<% end %>
+	</div>
+```
+
+Next, we need to add complete action in our `app/controllers/todo_items_controller.rb`
+```ruby
+class TodoItemsController < ApplicationController
+	before_action :set_todo_list
+	before_action :set_todo_item, except: [:create]
+
+	def create
+		@todo_item = @todo_list.todo_items.create(todo_item_params)
+		redirect_to @todo_list
+	end
+
+	def destroy
+		if @todo_item.destroy
+			flash[:success] = "Todo List item was deleted."
+		else
+			flash[:error] = "Todo List item could not be deleted."
+		end
+		redirect_to @todo_list
+	end
+
+	def complete
+		@todo_item.update_attribute(:completed_at, Time.now)
+		redirect_to @todo_list, notice: "Todo item complete"
+	end
+
+	private
+
+	def set_todo_list
+		@todo_list = TodoList.find(params[:todo_list_id])
+	end
+
+	def set_todo_item
+		@todo_item = @todo_list.todo_items.find(params[:id])
+	end
+
+	def todo_item_params
+		params[:todo_item].permit(:content)
+	end
+end
+```
+
+
+And under our model `app/models/todo_item.rb`, if it completed, it should not be blank.         
+```ruby
+class TodoItem < ApplicationRecord
+  belongs_to :todo_list
+
+  def completed?
+  	!completed_at.blank?
+  end
+end
+```
+![image](https://github.com/TimingJL/Todo-App/blob/master/pic/mark_as_complete.jpeg)
 
 
 
-
-
-
-
-
-
+The next thing I want to do is make it look quite a bit nicer.
 
 
 
