@@ -215,4 +215,41 @@ In `app/views/todo_lists/show.html.erb`
 Now, you can see we have the title, the description and a `New Todo` form.
 ![image](https://github.com/TimingJL/Todo-App/blob/master/pic/new_todo_form.jpeg)
 
+
+# Delete A Todo-Item
+I also want the ability to delete a todo-item.         
+In `app/views/todo_items/_todo_Item.html.erb`
+```html
+
+	<p><%= todo_item.content %></p>
+	<p><%= link_to  "Delete", todo_list_todo_item_path(@todo_list, todo_item.id), method: :delete, data: { confirm: "Are you sure?" } %></p>
+```
+
+And in `app/controllers/todo_items_controller.rb`, we add a delete action:
+```ruby
+def destroy
+	@todo_item = @todo_list.todo_items.find(params[:id])
+	if @todo_item.destroy
+		flash[:success] = "Todo List item was deleted."
+	else
+		flash[:error] = "Todo List item could not be deleted."
+	end
+	redirect_to @todo_list
+end
+```
+
+# Mark A Item As Complete
+Next, we want the ability to mark a item as complete.
+
+
+
+
+
+
+
+
+
+
+
+
 To be continued...
