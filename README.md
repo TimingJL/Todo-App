@@ -13,6 +13,10 @@ This time we build a pretty simple application. It's a Todo-list. We have multip
 
 https://mackenziechild.me/12-in-12/6/  
 
+![image](https://github.com/TimingJL/Todo-App/blob/master/pic/index_styling.jpeg)
+![image](https://github.com/TimingJL/Todo-App/blob/master/pic/show_styling.jpeg)
+![image](https://github.com/TimingJL/Todo-App/blob/master/pic/todo_list_new_styling.jpeg)
+![image](https://github.com/TimingJL/Todo-App/blob/master/pic/todo_item_edit_styling.jpeg)
 
 
 ### Highlights of this course
@@ -346,9 +350,431 @@ end
 ![image](https://github.com/TimingJL/Todo-App/blob/master/pic/mark_as_complete.jpeg)
 
 
+# Styling
+The next thing I want to do is make it look quite a bit nicer.      
+What I'm going to to first is rename `application.css` as `application.css.scss` in `app/assets/stylesheets/`.        
+And delete the `app/assets/stylesheets/scaffolds.scss`, `app/assets/stylesheets/todo_items.scss`, and `app/assets/stylesheets/todo_lists.scss`.
 
-The next thing I want to do is make it look quite a bit nicer.
+
+And paste this to `app/assets/stylesheets/application.scss`.
+```scss
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or vendor/assets/stylesheets of plugins, if any, can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+ *= require_tree .
+ *= require_self
+ */
+
+ $white_opaque: rgba(250, 250, 250, .3);
+ $dark: #1F7972;
+
+* {
+	box-sizing: border-box;
+}
+html {
+  height: 100%;
+}
+
+body {
+ 	height: 100%;
+  background: -webkit-linear-gradient(40deg, #4CB8C4 10%, #EAECC6 100%);
+  background:    -moz-linear-gradient(40deg, #4CB8C4 10%, #EAECC6 100%);
+  background:     -ms-linear-gradient(40deg, #4CB8C4 10%, #EAECC6 100%);
+  background:      -o-linear-gradient(40deg, #4CB8C4 10%, #EAECC6 100%);
+  background:         linear-gradient(40deg, #4CB8C4 10%, #EAECC6 100%);
+  font-family: 'Lato', sans-serif;
+}
+
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    display: table;
+}
+
+.clearfix:after {
+    clear: both;
+}
+
+#notice {
+	text-align: center;
+	font-size: 0.6em;
+	color: $dark;
+	font-weight: 100;
+}
+
+.container {
+	width: 50%;
+	max-width: 750px;
+	background: $white_opaque;
+	margin: 3em auto 0 auto;
+	border-radius: 7px;
+	-webkit-box-shadow: 0 0 4px 3px rgba(0,0,0,.3);
+	box-shadow: 0 0 4px 4px rgba(0,0,0,.03);
+	padding: 1em 0;
+}
+
+.todo_list_title {
+	text-align: center;
+	font-weight: 700;
+	font-size: 2.5rem;
+	text-transform: uppercase;
+	color: white;
+	margin: 0;
+	a {
+		text-decoration: none;
+		color: white;
+		transition: all .4s ease-in-out;
+		&:hover {
+			opacity: 0.4;
+		}
+	}
+}
+
+.todo_list_sub_title {
+	margin: 0 0 3em 0;
+	text-align: center;
+	font-size: 0.9em;
+	color: $dark;
+	font-weight: 100;
+}
+
+.index_row {
+	padding: 2em;
+	border-bottom: 1px solid rgba(250,250,250, .3);
+	.todo_list_sub_title {
+		margin-bottom: 0;
+	}
+}
+
+#todo_items_wrapper {
+	.row {
+		width: 100%;
+		border-top: 1px solid rgba(250,250,250, .3);
+		border-bottom: 1px solid rgba(250,250,250, .3);
+		.complete {
+			width: 10%;
+			float: left;
+			text-align: center;
+			border-right: 1px solid rgba(250,250,250, .3);
+			padding: 1em 0;
+		}
+		.todo_item {
+			width: 80%;
+			float: left;
+			p {
+				margin: 0;
+				padding: 1em;
+				color: $dark;
+				font-weight: 100;
+			}
+		}
+		.trash {
+			width: 10%;
+			float: left;
+			text-align: center;
+			border-left: 1px solid rgba(250,250,250, .3);
+			padding: 1em 0;
+		}
+		i {
+			color: white;
+			transition: all .4s ease-in-out;
+			&:hover {
+				color: $dark;
+			}
+		}
+	}
+	#form {
+		margin-top: 2em;
+		padding: 0 5%;
+		input[type="text"] {
+			width: 72%;
+			margin-right: 2%;
+			display: inline-block;
+			outline: none;
+			background: rgba(250,250,250,.4);
+			border: none;
+			height: 40px;
+			border-radius: 4px;
+			padding: 1em 2em;
+		}
+		input[type="submit"] {
+			background: rgba(250,250,250,.4);
+			outline: none;
+			border: none;
+			height: 40px;
+			border-radius: 4px;
+			width: 25%;
+			display: inline-block;
+			transition: all .4s ease-in-out;
+			cursor: pointer;
+			&:hover {
+				background: $dark;
+			}
+		}
+		::-webkit-input-placeholder { color: $dark; }
+	}
+}
+
+.links {
+	display: block;
+	margin: 1.5em auto 0 auto;
+	text-align: center;
+	font-size: 0.8em;
+	color: white;
+	a {
+		color: white;
+	}
+}
+
+.forms {
+	padding: 0 5%;
+}
+label {
+	color: $dark;
+}
+input[type="text"], textarea {
+	width: 100%;
+	margin: .5em 2% 1em 0;
+	display: inline-block;
+	outline: none;
+	background: rgba(250,250,250,.4);
+	border: none;
+	height: 40px;
+	border-radius: 4px;
+	padding: 1em 2em;
+}
+textarea {
+	height: 200px;
+}
+input[type="submit"] {
+	background: white;
+	outline: none;
+	border: none;
+	height: 40px;
+	border-radius: 4px;
+	width: 25%;
+	display: inline-block;
+	transition: all .4s ease-in-out;
+	cursor: pointer;
+	color: $dark;
+	&:hover {
+		background: $dark;
+		color: white;
+	}
+}
+::-webkit-input-placeholder { color: $dark; }
+```
 
 
 
-To be continued...
+And in our views `app/views/layouts/application.html.erb`
+```ruby
+
+	<!DOCTYPE html>
+	<html>
+	<head>
+	  <title>Todo</title>
+	  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+	  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	  <%= csrf_meta_tags %>
+	</head>
+	<body>
+
+	<div class="container">
+		<%= yield %>
+	</div>
+
+	</body>
+	</html>
+```
+
+
+In `app/views/todo_lists/index.html.erb`
+```html
+
+	<% @todo_lists.each do |todo_list| %>
+	  <div class="index_row clearfix">
+	    <h2 class="todo_list_title"><%= link_to todo_list.title, todo_list %></h2>
+	    <p class="todo_list_sub_title"><%= todo_list.description %></p>
+	  </div>
+	<% end %>
+
+	<div class="links">
+	  <%= link_to "New Todo List", new_todo_list_path %>
+	</div>
+```
+![image](https://github.com/TimingJL/Todo-App/blob/master/pic/index_styling.jpeg)
+
+In `app/views/layouts/application.html.erb`, there is two things we need to add. One, I use a google font, as well as a awesome font for the icon.      
+Google font:       
+https://www.google.com/fonts/specimen/Lato             
+
+Font Awesome:
+http://fontawesome.io/get-started/       
+```html
+
+	<!DOCTYPE html>
+	<html>
+	<head>
+	  <title>Todo</title>
+	  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+	  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+	  <%= csrf_meta_tags %>
+	  <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700' rel='stylesheet' type='text/css'>
+	  <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css" rel="stylesheet">
+	</head>
+	<body>
+
+	<div class="container">
+		<%= yield %>
+	</div>
+
+	</body>
+	</html>
+```
+
+
+In `app/views/todo_items/_todo_item.html.erb`
+```html
+
+	<div class="row clearfix">
+		<% if todo_item.completed? %>
+			<div class="complete">
+				<%= link_to complete_todo_list_todo_item_path(@todo_list, todo_item.id), method: :patch do %>
+					<i style="opacity: 0.4;" class="fa fa-check"></i>
+				<% end %>
+			</div>
+			<div class="todo_item">
+				<p style="opacity: 0.4;"><strike><%= todo_item.content %></strike></p>
+			</div>
+			<div class="trash">
+				<%= link_to todo_list_todo_item_path(@todo_list, todo_item.id), method: :delete, data: { confirm: "Are you sure?" } do %>
+					<i class="fa fa-trash"></i>
+				<% end %>
+			</div>
+		<% else %>
+			<div class="complete">
+				<%= link_to complete_todo_list_todo_item_path(@todo_list, todo_item.id), method: :patch do %>
+					<i class="fa fa-check"></i>
+				<% end %>
+			</div>
+			<div class="todo_item">
+				<p><%= todo_item.content %></p>
+			</div>
+			<div class="trash">
+				<%= link_to todo_list_todo_item_path(@todo_list, todo_item.id), method: :delete, data: { confirm: "Are you sure?" } do %>
+					<i class="fa fa-trash"></i>
+				<% end %>
+			</div>
+		<% end %>
+	</div>
+```
+
+
+In `app/views/todo_lists/show.html.erb`
+```html
+
+	<p id="notice"><%= notice %></p>
+
+	<h2 class="todo_list_title"><%= @todo_list.title %></h2>
+	<p class="todo_list_sub_title"><%= @todo_list.description %></p>
+
+	<div id="todo_items_wrapper">
+		<%= render @todo_list.todo_items %>
+		<div id="form">
+			<%= render "todo_items/form" %>
+		</div>
+	</div>
+
+	<div class="links">
+		<%= link_to 'Edit', edit_todo_list_path(@todo_list) %> |
+		<%= link_to 'Delete', todo_list_path(@todo_list), method: :delete, data: { confirm: "Are you sure?" }
+	 %> |
+	  <%= link_to 'Back', todo_lists_path %>
+	</div>
+```
+
+And in `app/controllers/todo_lists_controller.rb`, we change the
+```
+format.html { redirect_to todo_lists_url, notice: 'Todo list was successfully destroyed.' }
+``` 
+to
+```
+format.html { redirect_to root_url, notice: 'Todo list was successfully destroyed.' }
+```
+![image](https://github.com/TimingJL/Todo-App/blob/master/pic/show_styling.jpeg)
+
+Next thing we want to do is the forms.        
+Let's go under our `app/views/todo_lists/new.html.erb`
+```html
+
+	<h1 class="todo_list_title">New Todo List</h1>
+
+	<div class="forms">
+		<%= render 'form' %>
+	</div>
+
+	<div class="links">
+		<%= link_to 'Back', todo_lists_path %>
+	</div>
+```
+
+In `app/views/todo_lists/_form.html.erb`
+```
+
+	<%= form_for(@todo_list) do |f| %>
+	  <% if @todo_list.errors.any? %>
+	    <div id="error_explanation">
+	      <h2><%= pluralize(@todo_list.errors.count, "error") %> prohibited this todo_list from being saved:</h2>
+
+	      <ul>
+	      <% @todo_list.errors.full_messages.each do |message| %>
+	        <li><%= message %></li>
+	      <% end %>
+	      </ul>
+	    </div>
+	  <% end %>
+
+	  <div class="field">
+	    <%= f.label :title %><br>
+	    <%= f.text_field :title %>
+	  </div>
+	  <div class="field">
+	    <%= f.label :description %><br>
+	    <%= f.text_area :description %>
+	  </div>
+	  <div class="actions">
+	    <%= f.submit %>
+	  </div>
+	<% end %>
+```
+![image](https://github.com/TimingJL/Todo-App/blob/master/pic/todo_list_new_styling.jpeg)
+
+
+In `app/views/todo_lists/edit.html.erb`
+```ruby
+
+	<h1 class="todo_list_title">Edit Todo List</h1>
+
+	<div class="forms">
+		<%= render 'form' %>
+	</div>
+
+	<div class="links">
+		<%= link_to 'Cancel', todo_lists_path %>
+	</div>
+```
+
+![image](https://github.com/TimingJL/Todo-App/blob/master/pic/todo_item_edit_styling.jpeg)
+
+
+Complete!
