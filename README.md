@@ -24,7 +24,6 @@ https://mackenziechild.me/12-in-12/6/
 2. Todo Items
 3. Mark As Complete
 4. Custom Styling
-5. HAML
 
 
 # Create A Todo-App
