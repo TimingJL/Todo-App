@@ -4,8 +4,9 @@
 ![Rails version](https://img.shields.io/badge/Rails-v5.0.0-blue.svg)
 ![Ruby version](https://img.shields.io/badge/Ruby-v2.3.1p112-red.svg)
 
-Mackenzie Child's video really inspired me. So I decided to follow all of his rails video tutorial to learn how to build a web app. Through the video, I would try to build the web app by my self and record the courses step by step in text to facilitate the review.
+Mackenzie Child's video really inspired me. So I decided to follow all of his rails video tutorial to learn how to build a web app. Through the video, I would try to build the web app by my self and record the courses step by step in text to facilitate the review.             
 
+![image](https://github.com/TimingJL/Todo-App/blob/master/pic/machenziechild.jpeg)
 
 # Project 6: How To Build A Todo App With Rails       
 This time we build a pretty simple application. It's a Todo-list. We have multiple lists and multiple todo items for each list. And the ability to check an item if the item has been completed or not as well as delete the item. And we'll focus on what the application looks like(styling).
